@@ -4,31 +4,35 @@ public class CalculatorVisitor : CalculatorBaseVisitor<double>
 {
     public override double VisitNumber(CalculatorParser.NumberContext context)
     {
-        throw new NotImplementedException();
+        return double.Parse(context.NUMBER().GetText());
     }
 
     public override double VisitParentheses(CalculatorParser.ParenthesesContext context)
     {
-        throw new NotImplementedException();
+        return base.Visit(context.inner);
     }
 
     public override double VisitNegation(CalculatorParser.NegationContext context)
     {
-        throw new NotImplementedException();
+        return -base.Visit(context.right);
     }
 
     public override double VisitPower(CalculatorParser.PowerContext context)
     {
-        throw new NotImplementedException();
+        return Math.Pow(base.Visit(context.left), base.Visit(context.right));
     }
 
     public override double VisitAdditionOrSubtraction(CalculatorParser.AdditionOrSubtractionContext context)
     {
-        throw new NotImplementedException();
+        if (context.@operator.Text == "+")
+            return base.Visit(context.left) + base.Visit(context.right);
+        return base.Visit(context.left) - base.Visit(context.right);
     }
 
     public override double VisitMultiplicationOrDivision(CalculatorParser.MultiplicationOrDivisionContext context)
     {
-        throw new NotImplementedException();
+        if (context.@operator.Text == "*")
+            return base.Visit(context.left) * base.Visit(context.right);
+        return base.Visit(context.left) / base.Visit(context.right);
     }
 }
