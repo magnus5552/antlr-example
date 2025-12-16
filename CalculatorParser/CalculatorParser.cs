@@ -36,7 +36,8 @@ public partial class CalculatorParser : Parser {
 	protected static DFA[] decisionToDFA;
 	protected static PredictionContextCache sharedContextCache = new PredictionContextCache();
 	public const int
-		INT=1, MINUS=2, OP_0=3, OP_1=4, OP_2=5, LEFT_BRACKET=6, RIGHT_BRACKET=7;
+		LEFT_PARENTHESIS=1, RIGHT_PARENTHESIS=2, CARET=3, STAR=4, SLASH=5, PLUS=6, 
+		MINUS=7, NUMBER=8, WHITESPACE=9;
 	public const int
 		RULE_start = 0, RULE_expression = 1;
 	public static readonly string[] ruleNames = {
@@ -44,10 +45,11 @@ public partial class CalculatorParser : Parser {
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, null, "'-'", "'^'", null, null, "'('", "')'"
+		null, "'('", "')'", "'^'", "'*'", "'/'", "'+'", "'-'"
 	};
 	private static readonly string[] _SymbolicNames = {
-		null, "INT", "MINUS", "OP_0", "OP_1", "OP_2", "LEFT_BRACKET", "RIGHT_BRACKET"
+		null, "LEFT_PARENTHESIS", "RIGHT_PARENTHESIS", "CARET", "STAR", "SLASH", 
+		"PLUS", "MINUS", "NUMBER", "WHITESPACE"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -142,60 +144,8 @@ public partial class CalculatorParser : Parser {
 			base.CopyFrom(context);
 		}
 	}
-	public partial class ParenthesisContext : ExpressionContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LEFT_BRACKET() { return GetToken(CalculatorParser.LEFT_BRACKET, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression() {
-			return GetRuleContext<ExpressionContext>(0);
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode RIGHT_BRACKET() { return GetToken(CalculatorParser.RIGHT_BRACKET, 0); }
-		public ParenthesisContext(ExpressionContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.EnterParenthesis(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.ExitParenthesis(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICalculatorVisitor<TResult> typedVisitor = visitor as ICalculatorVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitParenthesis(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-	public partial class AddOrSubContext : ExpressionContext {
-		public ExpressionContext left;
-		public ExpressionContext right;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode OP_2() { return GetToken(CalculatorParser.OP_2, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext[] expression() {
-			return GetRuleContexts<ExpressionContext>();
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression(int i) {
-			return GetRuleContext<ExpressionContext>(i);
-		}
-		public AddOrSubContext(ExpressionContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.EnterAddOrSub(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.ExitAddOrSub(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICalculatorVisitor<TResult> typedVisitor = visitor as ICalculatorVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitAddOrSub(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
 	public partial class NumberContext : ExpressionContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode INT() { return GetToken(CalculatorParser.INT, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NUMBER() { return GetToken(CalculatorParser.NUMBER, 0); }
 		public NumberContext(ExpressionContext context) { CopyFrom(context); }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
@@ -214,82 +164,141 @@ public partial class CalculatorParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
-	public partial class PowContext : ExpressionContext {
-		public ExpressionContext left;
+	public partial class NegationContext : ExpressionContext {
 		public ExpressionContext right;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode OP_0() { return GetToken(CalculatorParser.OP_0, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext[] expression() {
-			return GetRuleContexts<ExpressionContext>();
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression(int i) {
-			return GetRuleContext<ExpressionContext>(i);
-		}
-		public PowContext(ExpressionContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.EnterPow(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.ExitPow(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICalculatorVisitor<TResult> typedVisitor = visitor as ICalculatorVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitPow(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-	public partial class UnaryMinusContext : ExpressionContext {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MINUS() { return GetToken(CalculatorParser.MINUS, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression() {
 			return GetRuleContext<ExpressionContext>(0);
 		}
-		public UnaryMinusContext(ExpressionContext context) { CopyFrom(context); }
+		public NegationContext(ExpressionContext context) { CopyFrom(context); }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.EnterUnaryMinus(this);
+			if (typedListener != null) typedListener.EnterNegation(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.ExitUnaryMinus(this);
+			if (typedListener != null) typedListener.ExitNegation(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			ICalculatorVisitor<TResult> typedVisitor = visitor as ICalculatorVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitUnaryMinus(this);
+			if (typedVisitor != null) return typedVisitor.VisitNegation(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
-	public partial class MultOrDivContext : ExpressionContext {
+	public partial class AdditionOrSubtractionContext : ExpressionContext {
 		public ExpressionContext left;
+		public IToken @operator;
 		public ExpressionContext right;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode OP_1() { return GetToken(CalculatorParser.OP_1, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext[] expression() {
 			return GetRuleContexts<ExpressionContext>();
 		}
 		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression(int i) {
 			return GetRuleContext<ExpressionContext>(i);
 		}
-		public MultOrDivContext(ExpressionContext context) { CopyFrom(context); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode PLUS() { return GetToken(CalculatorParser.PLUS, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MINUS() { return GetToken(CalculatorParser.MINUS, 0); }
+		public AdditionOrSubtractionContext(ExpressionContext context) { CopyFrom(context); }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.EnterMultOrDiv(this);
+			if (typedListener != null) typedListener.EnterAdditionOrSubtraction(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			ICalculatorListener typedListener = listener as ICalculatorListener;
-			if (typedListener != null) typedListener.ExitMultOrDiv(this);
+			if (typedListener != null) typedListener.ExitAdditionOrSubtraction(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			ICalculatorVisitor<TResult> typedVisitor = visitor as ICalculatorVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitMultOrDiv(this);
+			if (typedVisitor != null) return typedVisitor.VisitAdditionOrSubtraction(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class MultiplicationOrDivisionContext : ExpressionContext {
+		public ExpressionContext left;
+		public IToken @operator;
+		public ExpressionContext right;
+		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext[] expression() {
+			return GetRuleContexts<ExpressionContext>();
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression(int i) {
+			return GetRuleContext<ExpressionContext>(i);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode STAR() { return GetToken(CalculatorParser.STAR, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode SLASH() { return GetToken(CalculatorParser.SLASH, 0); }
+		public MultiplicationOrDivisionContext(ExpressionContext context) { CopyFrom(context); }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			ICalculatorListener typedListener = listener as ICalculatorListener;
+			if (typedListener != null) typedListener.EnterMultiplicationOrDivision(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			ICalculatorListener typedListener = listener as ICalculatorListener;
+			if (typedListener != null) typedListener.ExitMultiplicationOrDivision(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICalculatorVisitor<TResult> typedVisitor = visitor as ICalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMultiplicationOrDivision(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class ParenthesesContext : ExpressionContext {
+		public ExpressionContext inner;
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LEFT_PARENTHESIS() { return GetToken(CalculatorParser.LEFT_PARENTHESIS, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode RIGHT_PARENTHESIS() { return GetToken(CalculatorParser.RIGHT_PARENTHESIS, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression() {
+			return GetRuleContext<ExpressionContext>(0);
+		}
+		public ParenthesesContext(ExpressionContext context) { CopyFrom(context); }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			ICalculatorListener typedListener = listener as ICalculatorListener;
+			if (typedListener != null) typedListener.EnterParentheses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			ICalculatorListener typedListener = listener as ICalculatorListener;
+			if (typedListener != null) typedListener.ExitParentheses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICalculatorVisitor<TResult> typedVisitor = visitor as ICalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParentheses(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class PowerContext : ExpressionContext {
+		public ExpressionContext left;
+		public IToken @operator;
+		public ExpressionContext right;
+		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext[] expression() {
+			return GetRuleContexts<ExpressionContext>();
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression(int i) {
+			return GetRuleContext<ExpressionContext>(i);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode CARET() { return GetToken(CalculatorParser.CARET, 0); }
+		public PowerContext(ExpressionContext context) { CopyFrom(context); }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			ICalculatorListener typedListener = listener as ICalculatorListener;
+			if (typedListener != null) typedListener.EnterPower(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			ICalculatorListener typedListener = listener as ICalculatorListener;
+			if (typedListener != null) typedListener.ExitPower(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICalculatorVisitor<TResult> typedVisitor = visitor as ICalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPower(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -306,6 +315,7 @@ public partial class CalculatorParser : Parser {
 		ExpressionContext _prevctx = _localctx;
 		int _startState = 2;
 		EnterRecursionRule(_localctx, 2, RULE_expression, _p);
+		int _la;
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
@@ -313,38 +323,38 @@ public partial class CalculatorParser : Parser {
 			State = 14;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
-			case LEFT_BRACKET:
-				{
-				_localctx = new ParenthesisContext(_localctx);
-				Context = _localctx;
-				_prevctx = _localctx;
-
-				State = 7;
-				Match(LEFT_BRACKET);
-				State = 8;
-				expression(0);
-				State = 9;
-				Match(RIGHT_BRACKET);
-				}
-				break;
-			case INT:
+			case NUMBER:
 				{
 				_localctx = new NumberContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 11;
-				Match(INT);
+
+				State = 7;
+				Match(NUMBER);
 				}
 				break;
 			case MINUS:
 				{
-				_localctx = new UnaryMinusContext(_localctx);
+				_localctx = new NegationContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 12;
+				State = 8;
 				Match(MINUS);
-				State = 13;
-				expression(4);
+				State = 9;
+				((NegationContext)_localctx).right = expression(5);
+				}
+				break;
+			case LEFT_PARENTHESIS:
+				{
+				_localctx = new ParenthesesContext(_localctx);
+				Context = _localctx;
+				_prevctx = _localctx;
+				State = 10;
+				Match(LEFT_PARENTHESIS);
+				State = 11;
+				((ParenthesesContext)_localctx).inner = expression(0);
+				State = 12;
+				Match(RIGHT_PARENTHESIS);
 				}
 				break;
 			default:
@@ -365,41 +375,57 @@ public partial class CalculatorParser : Parser {
 					switch ( Interpreter.AdaptivePredict(TokenStream,1,Context) ) {
 					case 1:
 						{
-						_localctx = new PowContext(new ExpressionContext(_parentctx, _parentState));
-						((PowContext)_localctx).left = _prevctx;
+						_localctx = new PowerContext(new ExpressionContext(_parentctx, _parentState));
+						((PowerContext)_localctx).left = _prevctx;
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
 						State = 16;
 						if (!(Precpred(Context, 3))) throw new FailedPredicateException(this, "Precpred(Context, 3)");
 						State = 17;
-						Match(OP_0);
+						((PowerContext)_localctx).@operator = Match(CARET);
 						State = 18;
-						((PowContext)_localctx).right = expression(4);
+						((PowerContext)_localctx).right = expression(4);
 						}
 						break;
 					case 2:
 						{
-						_localctx = new MultOrDivContext(new ExpressionContext(_parentctx, _parentState));
-						((MultOrDivContext)_localctx).left = _prevctx;
+						_localctx = new MultiplicationOrDivisionContext(new ExpressionContext(_parentctx, _parentState));
+						((MultiplicationOrDivisionContext)_localctx).left = _prevctx;
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
 						State = 19;
 						if (!(Precpred(Context, 2))) throw new FailedPredicateException(this, "Precpred(Context, 2)");
 						State = 20;
-						Match(OP_1);
+						((MultiplicationOrDivisionContext)_localctx).@operator = TokenStream.LT(1);
+						_la = TokenStream.LA(1);
+						if ( !(_la==STAR || _la==SLASH) ) {
+							((MultiplicationOrDivisionContext)_localctx).@operator = ErrorHandler.RecoverInline(this);
+						}
+						else {
+							ErrorHandler.ReportMatch(this);
+						    Consume();
+						}
 						State = 21;
-						((MultOrDivContext)_localctx).right = expression(3);
+						((MultiplicationOrDivisionContext)_localctx).right = expression(3);
 						}
 						break;
 					case 3:
 						{
-						_localctx = new AddOrSubContext(new ExpressionContext(_parentctx, _parentState));
-						((AddOrSubContext)_localctx).left = _prevctx;
+						_localctx = new AdditionOrSubtractionContext(new ExpressionContext(_parentctx, _parentState));
+						((AdditionOrSubtractionContext)_localctx).left = _prevctx;
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
 						State = 22;
 						if (!(Precpred(Context, 1))) throw new FailedPredicateException(this, "Precpred(Context, 1)");
 						State = 23;
-						Match(OP_2);
+						((AdditionOrSubtractionContext)_localctx).@operator = TokenStream.LT(1);
+						_la = TokenStream.LA(1);
+						if ( !(_la==PLUS || _la==MINUS) ) {
+							((AdditionOrSubtractionContext)_localctx).@operator = ErrorHandler.RecoverInline(this);
+						}
+						else {
+							ErrorHandler.ReportMatch(this);
+						    Consume();
+						}
 						State = 24;
-						((AddOrSubContext)_localctx).right = expression(2);
+						((AdditionOrSubtractionContext)_localctx).right = expression(2);
 						}
 						break;
 					}
@@ -438,15 +464,16 @@ public partial class CalculatorParser : Parser {
 	}
 
 	private static int[] _serializedATN = {
-		4,1,7,31,2,0,7,0,2,1,7,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,15,
+		4,1,9,31,2,0,7,0,2,1,7,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,15,
 		8,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,26,8,1,10,1,12,1,29,9,1,1,
-		1,0,1,2,2,0,2,0,0,33,0,4,1,0,0,0,2,14,1,0,0,0,4,5,3,2,1,0,5,1,1,0,0,0,
-		6,7,6,1,-1,0,7,8,5,6,0,0,8,9,3,2,1,0,9,10,5,7,0,0,10,15,1,0,0,0,11,15,
-		5,1,0,0,12,13,5,2,0,0,13,15,3,2,1,4,14,6,1,0,0,0,14,11,1,0,0,0,14,12,1,
-		0,0,0,15,27,1,0,0,0,16,17,10,3,0,0,17,18,5,3,0,0,18,26,3,2,1,4,19,20,10,
-		2,0,0,20,21,5,4,0,0,21,26,3,2,1,3,22,23,10,1,0,0,23,24,5,5,0,0,24,26,3,
-		2,1,2,25,16,1,0,0,0,25,19,1,0,0,0,25,22,1,0,0,0,26,29,1,0,0,0,27,25,1,
-		0,0,0,27,28,1,0,0,0,28,3,1,0,0,0,29,27,1,0,0,0,3,14,25,27
+		1,0,1,2,2,0,2,0,2,1,0,4,5,1,0,6,7,33,0,4,1,0,0,0,2,14,1,0,0,0,4,5,3,2,
+		1,0,5,1,1,0,0,0,6,7,6,1,-1,0,7,15,5,8,0,0,8,9,5,7,0,0,9,15,3,2,1,5,10,
+		11,5,1,0,0,11,12,3,2,1,0,12,13,5,2,0,0,13,15,1,0,0,0,14,6,1,0,0,0,14,8,
+		1,0,0,0,14,10,1,0,0,0,15,27,1,0,0,0,16,17,10,3,0,0,17,18,5,3,0,0,18,26,
+		3,2,1,4,19,20,10,2,0,0,20,21,7,0,0,0,21,26,3,2,1,3,22,23,10,1,0,0,23,24,
+		7,1,0,0,24,26,3,2,1,2,25,16,1,0,0,0,25,19,1,0,0,0,25,22,1,0,0,0,26,29,
+		1,0,0,0,27,25,1,0,0,0,27,28,1,0,0,0,28,3,1,0,0,0,29,27,1,0,0,0,3,14,25,
+		27
 	};
 
 	public static readonly ATN _ATN =

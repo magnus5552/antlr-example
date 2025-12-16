@@ -48,34 +48,6 @@ public partial class CalculatorBaseListener : ICalculatorListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitStart([NotNull] CalculatorParser.StartContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by the <c>Parenthesis</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterParenthesis([NotNull] CalculatorParser.ParenthesisContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>Parenthesis</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitParenthesis([NotNull] CalculatorParser.ParenthesisContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by the <c>AddOrSub</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterAddOrSub([NotNull] CalculatorParser.AddOrSubContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>AddOrSub</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitAddOrSub([NotNull] CalculatorParser.AddOrSubContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by the <c>Number</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -90,47 +62,75 @@ public partial class CalculatorBaseListener : ICalculatorListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitNumber([NotNull] CalculatorParser.NumberContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by the <c>Pow</c>
+	/// Enter a parse tree produced by the <c>Negation</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterPow([NotNull] CalculatorParser.PowContext context) { }
+	public virtual void EnterNegation([NotNull] CalculatorParser.NegationContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by the <c>Pow</c>
+	/// Exit a parse tree produced by the <c>Negation</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitPow([NotNull] CalculatorParser.PowContext context) { }
+	public virtual void ExitNegation([NotNull] CalculatorParser.NegationContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by the <c>UnaryMinus</c>
+	/// Enter a parse tree produced by the <c>AdditionOrSubtraction</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterUnaryMinus([NotNull] CalculatorParser.UnaryMinusContext context) { }
+	public virtual void EnterAdditionOrSubtraction([NotNull] CalculatorParser.AdditionOrSubtractionContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by the <c>UnaryMinus</c>
+	/// Exit a parse tree produced by the <c>AdditionOrSubtraction</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitUnaryMinus([NotNull] CalculatorParser.UnaryMinusContext context) { }
+	public virtual void ExitAdditionOrSubtraction([NotNull] CalculatorParser.AdditionOrSubtractionContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by the <c>MultOrDiv</c>
+	/// Enter a parse tree produced by the <c>MultiplicationOrDivision</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterMultOrDiv([NotNull] CalculatorParser.MultOrDivContext context) { }
+	public virtual void EnterMultiplicationOrDivision([NotNull] CalculatorParser.MultiplicationOrDivisionContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by the <c>MultOrDiv</c>
+	/// Exit a parse tree produced by the <c>MultiplicationOrDivision</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitMultOrDiv([NotNull] CalculatorParser.MultOrDivContext context) { }
+	public virtual void ExitMultiplicationOrDivision([NotNull] CalculatorParser.MultiplicationOrDivisionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>Parentheses</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterParentheses([NotNull] CalculatorParser.ParenthesesContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>Parentheses</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitParentheses([NotNull] CalculatorParser.ParenthesesContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>Power</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPower([NotNull] CalculatorParser.PowerContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>Power</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPower([NotNull] CalculatorParser.PowerContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

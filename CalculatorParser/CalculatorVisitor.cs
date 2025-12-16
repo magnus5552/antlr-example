@@ -38,20 +38,6 @@ public interface ICalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitStart([NotNull] CalculatorParser.StartContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>Parenthesis</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitParenthesis([NotNull] CalculatorParser.ParenthesisContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>AddOrSub</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitAddOrSub([NotNull] CalculatorParser.AddOrSubContext context);
-	/// <summary>
 	/// Visit a parse tree produced by the <c>Number</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
@@ -59,24 +45,38 @@ public interface ICalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitNumber([NotNull] CalculatorParser.NumberContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>Pow</c>
+	/// Visit a parse tree produced by the <c>Negation</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitPow([NotNull] CalculatorParser.PowContext context);
+	Result VisitNegation([NotNull] CalculatorParser.NegationContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>UnaryMinus</c>
+	/// Visit a parse tree produced by the <c>AdditionOrSubtraction</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitUnaryMinus([NotNull] CalculatorParser.UnaryMinusContext context);
+	Result VisitAdditionOrSubtraction([NotNull] CalculatorParser.AdditionOrSubtractionContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>MultOrDiv</c>
+	/// Visit a parse tree produced by the <c>MultiplicationOrDivision</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitMultOrDiv([NotNull] CalculatorParser.MultOrDivContext context);
+	Result VisitMultiplicationOrDivision([NotNull] CalculatorParser.MultiplicationOrDivisionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>Parentheses</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitParentheses([NotNull] CalculatorParser.ParenthesesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>Power</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPower([NotNull] CalculatorParser.PowerContext context);
 }

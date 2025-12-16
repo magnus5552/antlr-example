@@ -41,30 +41,6 @@ public interface ICalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitStart([NotNull] CalculatorParser.StartContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>Parenthesis</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterParenthesis([NotNull] CalculatorParser.ParenthesisContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>Parenthesis</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitParenthesis([NotNull] CalculatorParser.ParenthesisContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>AddOrSub</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterAddOrSub([NotNull] CalculatorParser.AddOrSubContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>AddOrSub</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitAddOrSub([NotNull] CalculatorParser.AddOrSubContext context);
-	/// <summary>
 	/// Enter a parse tree produced by the <c>Number</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
@@ -77,39 +53,63 @@ public interface ICalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitNumber([NotNull] CalculatorParser.NumberContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>Pow</c>
+	/// Enter a parse tree produced by the <c>Negation</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterPow([NotNull] CalculatorParser.PowContext context);
+	void EnterNegation([NotNull] CalculatorParser.NegationContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>Pow</c>
+	/// Exit a parse tree produced by the <c>Negation</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitPow([NotNull] CalculatorParser.PowContext context);
+	void ExitNegation([NotNull] CalculatorParser.NegationContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>UnaryMinus</c>
+	/// Enter a parse tree produced by the <c>AdditionOrSubtraction</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterUnaryMinus([NotNull] CalculatorParser.UnaryMinusContext context);
+	void EnterAdditionOrSubtraction([NotNull] CalculatorParser.AdditionOrSubtractionContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>UnaryMinus</c>
+	/// Exit a parse tree produced by the <c>AdditionOrSubtraction</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitUnaryMinus([NotNull] CalculatorParser.UnaryMinusContext context);
+	void ExitAdditionOrSubtraction([NotNull] CalculatorParser.AdditionOrSubtractionContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>MultOrDiv</c>
+	/// Enter a parse tree produced by the <c>MultiplicationOrDivision</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMultOrDiv([NotNull] CalculatorParser.MultOrDivContext context);
+	void EnterMultiplicationOrDivision([NotNull] CalculatorParser.MultiplicationOrDivisionContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>MultOrDiv</c>
+	/// Exit a parse tree produced by the <c>MultiplicationOrDivision</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMultOrDiv([NotNull] CalculatorParser.MultOrDivContext context);
+	void ExitMultiplicationOrDivision([NotNull] CalculatorParser.MultiplicationOrDivisionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>Parentheses</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterParentheses([NotNull] CalculatorParser.ParenthesesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>Parentheses</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitParentheses([NotNull] CalculatorParser.ParenthesesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>Power</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPower([NotNull] CalculatorParser.PowerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>Power</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPower([NotNull] CalculatorParser.PowerContext context);
 }

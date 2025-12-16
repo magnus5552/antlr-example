@@ -2,20 +2,21 @@ grammar Calculator ;
 
 start : expression ;
 
-expression : LEFT_BRACKET expression RIGHT_BRACKET #Parenthesis
-    | INT                                   #Number
-    | MINUS expression                      #UnaryMinus 
-    | left=expression OP_0 right=expression #Pow 
-    | left=expression OP_1 right=expression #MultOrDiv
-    | left=expression OP_2 right=expression #AddOrSub
-    ;
+expression
+   : NUMBER                                                 # Number
+   | MINUS right=expression                                 # Negation
+   | LEFT_PARENTHESIS inner=expression RIGHT_PARENTHESIS    # Parentheses
+   | left=expression operator=CARET right=expression        # Power
+   | left=expression operator=(STAR|SLASH) right=expression # MultiplicationOrDivision
+   | left=expression operator=(PLUS|MINUS) right=expression # AdditionOrSubtraction
+   ;
 
-INT: [0-9]+ ;
-
+LEFT_PARENTHESIS: '(' ;
+RIGHT_PARENTHESIS: ')' ;
+CARET: '^' ;
+STAR: '*' ;
+SLASH: '/' ;
+PLUS: '+' ;
 MINUS: '-' ;
-OP_0: '^' ;
-OP_1: '*' | '/' ;
-OP_2: '+' | MINUS ; 
-
-LEFT_BRACKET: '(' ;
-RIGHT_BRACKET: ')' ;
+NUMBER: [0-9]+ ;
+WHITESPACE: [ \r\n\t]+ -> skip ;

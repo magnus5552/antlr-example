@@ -45,28 +45,6 @@ public partial class CalculatorBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// <return>The visitor result.</return>
 	public virtual Result VisitStart([NotNull] CalculatorParser.StartContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by the <c>Parenthesis</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitParenthesis([NotNull] CalculatorParser.ParenthesisContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by the <c>AddOrSub</c>
-	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitAddOrSub([NotNull] CalculatorParser.AddOrSubContext context) { return VisitChildren(context); }
-	/// <summary>
 	/// Visit a parse tree produced by the <c>Number</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>
@@ -78,7 +56,7 @@ public partial class CalculatorBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// <return>The visitor result.</return>
 	public virtual Result VisitNumber([NotNull] CalculatorParser.NumberContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by the <c>Pow</c>
+	/// Visit a parse tree produced by the <c>Negation</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -87,9 +65,9 @@ public partial class CalculatorBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitPow([NotNull] CalculatorParser.PowContext context) { return VisitChildren(context); }
+	public virtual Result VisitNegation([NotNull] CalculatorParser.NegationContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by the <c>UnaryMinus</c>
+	/// Visit a parse tree produced by the <c>AdditionOrSubtraction</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -98,9 +76,9 @@ public partial class CalculatorBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitUnaryMinus([NotNull] CalculatorParser.UnaryMinusContext context) { return VisitChildren(context); }
+	public virtual Result VisitAdditionOrSubtraction([NotNull] CalculatorParser.AdditionOrSubtractionContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by the <c>MultOrDiv</c>
+	/// Visit a parse tree produced by the <c>MultiplicationOrDivision</c>
 	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -109,5 +87,27 @@ public partial class CalculatorBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitMultOrDiv([NotNull] CalculatorParser.MultOrDivContext context) { return VisitChildren(context); }
+	public virtual Result VisitMultiplicationOrDivision([NotNull] CalculatorParser.MultiplicationOrDivisionContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by the <c>Parentheses</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitParentheses([NotNull] CalculatorParser.ParenthesesContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by the <c>Power</c>
+	/// labeled alternative in <see cref="CalculatorParser.expression"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitPower([NotNull] CalculatorParser.PowerContext context) { return VisitChildren(context); }
 }
