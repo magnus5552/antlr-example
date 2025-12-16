@@ -1,0 +1,11 @@
+INT=1
+MINUS=2
+OP_0=3
+OP_1=4
+OP_2=5
+LEFT_BRACKET=6
+RIGHT_BRACKET=7
+'-'=2
+'^'=3
+'('=6
+')'=7
